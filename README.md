@@ -1,6 +1,6 @@
 ## PHP CRUD SYSTEM
 
-A simple CRUD (Create, Read, Update, Delete) system built using **PHP** and **MySQL** to manage customers and their related orders.
+A simple CRUD system built using **PHP** and **MySQL** to manage customers and their related orders.
 It provides a clean and minimal interface for basic data management operations.
 
 
