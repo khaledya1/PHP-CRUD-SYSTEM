@@ -28,7 +28,7 @@ if(isset($_GET['edit'])){
 ?>
 
 
-<h1 class="text-center my-3">Update Products</h1>
+<h1 class="text-center my-3">Update Product</h1>
 <div class="container col-9 ">
 <div class="card  ">
     <a class="btn mb-3 btn-info float-end " href="./products_list.php">List All Customers</a>
