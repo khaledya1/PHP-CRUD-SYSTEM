@@ -36,7 +36,7 @@ if(isset($_POST['send'])){
     if (isset($_SESSION['message'])) {
     header("Refresh: 2; URL=/CRUD/customers/create_customers.php");
     }
-
+    ## Check if the form is submitted
 ?>
 
 

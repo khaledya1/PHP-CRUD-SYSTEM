@@ -30,6 +30,7 @@ if (isset($_POST['send'])) {
 if (isset($_SESSION['message'])) {
     header("Refresh: 2; URL=create_order.php");
 }
+## Check if the form is submitted
 ?>
 
 <h1 class="text-center my-3">Create Order</h1>

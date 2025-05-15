@@ -10,5 +10,5 @@ $connect = mysqli_connect($host,$user,$password,$db_name);
 }catch(Exception $e){
 echo $e -> getMessage();
 }
-
+## Check if the connection was successful
 ?>
