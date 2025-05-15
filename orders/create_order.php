@@ -8,21 +8,46 @@ $customers_data = mysqli_query($connect, $customers_query);
 
 $products_query = "SELECT * FROM products";
 $products_data = mysqli_query($connect, $products_query);
+
+// Handle form submission
+if (isset($_POST['send'])) {
+    $amount = $_POST['amount'];
+    $create_date = date('Y-m-d H:i:s');
+    $customer_id = $_POST['customer_id'];
+    $product_id = $_POST['product_id'];
+
+    $insert = "INSERT INTO orders (amount, create_date, customer_id, product_id) 
+               VALUES ('$amount', '$create_date', '$customer_id', '$product_id')";
+    if (mysqli_query($connect, $insert)) {
+        $_SESSION['message'] = "Order created successfully!";
+        header("Location: /CRUD/orders/create_order.php");
+        exit();
+    } else {
+        echo "Error: " . mysqli_error($connect);
+    }
+}
+
+if (isset($_SESSION['message'])) {
+    header("Refresh: 2; URL=create_order.php");
+}
 ?>
 
 <h1 class="text-center my-3">Create Order</h1>
-<div class="container col-9 ">
+<div class="container col-9">
     <div class="card">
+        <?php if (isset($_SESSION['message'])): ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <?= $_SESSION['message'] ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <?php unset($_SESSION['message']); ?>
+        <?php endif ?>
         <a class="btn mb-3 btn-info float-end" href="./orders_list.php">List All Orders</a>
         <div class="card-body">
-            <form action="./orders_request.php" method="POST">
+            <form method="POST">
                 <div class="form-group">
                     <label>Amount</label>
                     <input type="number" class="form-control" name="amount" required>
-                </div>
-                <div class="form-group">
-                    <label>Create Date</label>
-                    <input type="date" class="form-control" name="create_date" required>
                 </div>
                 <div class="form-group">
                     <label>Customer</label>

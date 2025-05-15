@@ -1,3 +1,3 @@
-<script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/CRUD/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

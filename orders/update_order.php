@@ -11,7 +11,7 @@ if(isset($_GET['edit'])){
 
     if(isset($_POST['update'])){
         $amount = $_POST['amount'];
-        $create_date = $_POST['create_date'];
+        $create_date = date('Y-m-d H:i:s');
         $customer_id = $_POST['customer_id'];
         $product_id = $_POST['product_id'];
 
@@ -42,14 +42,11 @@ if(isset($_GET['edit'])){
                 <label>Amount</label>
                 <input type="number" value="<?= $row['amount'] ?>" class="form-control" name="amount" required>
             </div>
-            <div class="form-group">
-                <label>Create Date</label>
-                <input type="date" value="<?= $row['create_date'] ?>" class="form-control" name="create_date" required>
-            </div>
+
             <div class="form-group">
                 <label>Customer</label>
                 <select class="form-control" name="customer_id" required>
-                    <option value="" disabled selected>Select Customer</option>
+                    <option value="" disabled>Select Customer</option>
                     <?php
                     $customers_query = "SELECT * FROM customers";
                     $customers_data = mysqli_query($connect, $customers_query);
@@ -62,7 +59,7 @@ if(isset($_GET['edit'])){
             <div class="form-group">
                 <label>Product</label>
                 <select class="form-control" name="product_id" required>
-                    <option value="" disabled selected>Select Product</option>
+                    <option value="" disabled>Select Product</option>
                     <?php
                     $products_query = "SELECT * FROM products";
                     $products_data = mysqli_query($connect, $products_query);
