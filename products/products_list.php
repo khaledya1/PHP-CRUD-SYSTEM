@@ -24,7 +24,7 @@ if(isset($_GET['delete'])){
             <form class="form-group my-3" action="./search.php" method="post">
                 <div class="row align-items-center">
                 <div class="col-md-9 mb-2 mb-md-0">
-                    <input type="text" id="myInput" name="search_value" class="form-control" placeholder="Search By Name">
+                    <input type="text" id="myInput" name="search_value" class="form-control" placeholder="Search By Title">
                 </div>
                 <div class="col-md-3">
                     <button type="submit" name="search" class="btn btn-info w-100">Search</button>
