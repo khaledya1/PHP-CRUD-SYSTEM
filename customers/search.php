@@ -22,23 +22,46 @@ if(isset($_GET['delete'])){
     header("location: /CRUD/customers/customers_list.php");
 }
 
+if (isset($_POST['search'])) {
+    $search_value = $_POST['search_value'];
+    $read = "SELECT * FROM customers WHERE full_name LIKE '%$search_value%' OR phone LIKE '%$search_value%' ORDER BY  id DESC";
+    $data = mysqli_query($connect, $read);
+    $numRows = mysqli_num_rows($data);
+    if ($numRows == 0) {
+        $_SESSION['message'] = "No results found for '$search_value'";
+    }
+
+}
+if (isset($_POST['search'])) {
+    $search_value = $_POST['search_value'];
+    header("Location: search.php?search_value=" .$search_value);
+    exit();
+}
+
+if (isset($_GET['search_value'])) {
+    $search_value = $_GET['search_value'];
+    $read = "SELECT * FROM customers WHERE full_name LIKE '%$search_value%' OR phone LIKE '%$search_value%'ORDER BY id DESC";
+    $data = mysqli_query($connect, $read);
+}
+
+if (isset($_SESSION['message'])) {
+header("Refresh: 2; URL=/CRUD/customers/customers_list.php");
+}
+
 ?>
 
-<h1 class="text-center my-3" >List Customers Table</h1>
+<h1 class="text-center my-3" >Search Result</h1>
 <div class="container col-9 ">
+            <?php if (isset($_SESSION['message'])): ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <?= $_SESSION['message'] ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <?php unset($_SESSION['message']); ?>
+        <?php endif ?>
     <div class="card">
-        <a class="btn btn-info float-end mb-3 " href="./create_customers.php">Create New</a>
+        <a class="btn btn-info float-end mb-3 " href="./customers_list.php">List All Customers</a>
         <div class="card-body">
-            <form class="form-group my-3" action="./search.php" method="post">
-                <div class="row align-items-center">
-                <div class="col-md-9 mb-2 mb-md-0">
-                    <input type="text" id="myInput" name="search_value" class="form-control" placeholder="Search By Name">
-                </div>
-                <div class="col-md-3">
-                    <button type="submit" name="search" class="btn btn-info w-100">Search</button>
-                </div>
-                </div>
-            </form>
             <table id="myTable" class="table">
                 <tr>
                     <th>ID</th>

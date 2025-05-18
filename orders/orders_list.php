@@ -24,7 +24,7 @@ if(isset($_GET['delete'])){
     <div class="card">
         <a class="btn btn-info float-end mb-3" href="./create_order.php">Create New</a>
         <div class="card-body">
-            <table class="table">
+            <table id="myTable" class="table">
                 <tr>
                     <th>ID</th>
                     <th>Amount</th>
@@ -61,3 +61,4 @@ if(isset($_GET['delete'])){
         </div>
     </div>
 </div>
+<?php include_once '../shared/script.php'; ?>
