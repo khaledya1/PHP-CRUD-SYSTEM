@@ -22,7 +22,13 @@ if(isset($_POST['send'])){
     if (in_array($_FILES['image']['type'], $allowed_types)) {
         move_uploaded_file($tmp_name, $location);
     } else {
+        if(empty($_FILES['image']['type'])){
+            $image_name = "def.jpg" ;
+            move_uploaded_file($tmp_name, $location);
+        }
+        else{
         die("File type not allowed");
+    }
     }
 
     $insert = "INSERT INTO customers VALUES(NULL , '$full_name' 
