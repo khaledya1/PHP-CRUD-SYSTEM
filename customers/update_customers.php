@@ -48,7 +48,7 @@ if(isset($_GET['edit'])){
                     age = '$age', 
                     phone = '$phone', 
                     image = '$image_name', 
-                    gender = '$gender' 
+                    gender = '$gender'
                     WHERE id = $id";
 
         if (mysqli_query($connect, $update)) {
@@ -57,6 +57,22 @@ if(isset($_GET['edit'])){
         } else {
             die("Error updating record: " . mysqli_error($connect));
         }
+    }
+}
+if(isset($_POST['remove_image'])){
+    $id = $_POST['id'];
+    $old_image = $_POST['old_image'];
+    if ($old_image !== "def.jpg") {
+        unlink("./upload/$old_image");
+    }
+    $update = "UPDATE customers SET 
+    image = 'def.jpg' 
+    WHERE id = $id";
+    if (mysqli_query($connect, $update)) {
+    header("location: /CRUD/customers/update_customers.php?edit=$id");
+    exit();
+    } else {
+    die("Error updating record: " . mysqli_error($connect));
     }
 }
 ?>
@@ -86,7 +102,12 @@ if(isset($_GET['edit'])){
             </div>
             <div class="form-group">
                 <label>Customer Image : <img width="50" src="./upload/<?=$row['image']?>" 
-                alt=""> </label>
+                alt=""></label>
+                <?php if($row['image'] !== "def.jpg"): ?>
+                        <input type="hidden" name="id" value="<?= $row['id'] ?>" >
+                        <input type="hidden" name="old_image" value="<?= $row['image'] ?>" >
+                        <button class="btn btn-danger mx-3 my-2" name="remove_image" >Remove Image</button>
+                <?php endif ?>
                 <input type="file" accept="image/*" class="form-control" name="image">
             </div>
             <div class="form-group">
